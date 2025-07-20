@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Peruano </title>
+    <link rel="icon" type="image/x-icon" href="/static/platillos/1-63a29acc.ico">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" role="banner">
+        <div class="header-container">
+            <div class="header-logo" aria-label="Logo del restaurante">
+                <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+            </div>
+            <h1 class="header-title">Recomendador Inteligente</h1>
+            <div class="header-subtitle">Versión Beta</div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Columna del Menú -->
+            <section class="menu-section" aria-labelledby="menu-title">
+                <div class="menu-header">
+                    <h2 id="menu-title" class="section-title">Menú Peruano</h2>
+                    <div class="menu-stats">
+                        <span class="stat-item">
+                            <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                            <span id="total-platillos">0</span> platillos
+                        </span>
+                        <span class="stat-item">
+                            <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                            <span id="tiempo-promedio">0</span> min
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Menú Físico -->
+                <div class="menu-physical">
+                    <img src="/static/carta/Menu.png" alt="Menú físico del restaurante" class="menu-img">
+                </div>
+
+                <!-- Menú Digital Dinámico -->
+                <div class="menu-digital" id="menu-digital">
+                    <div class="menu-filters">
+                        <button class="filter-btn active" data-categoria="todos" aria-pressed="true">
+                            <i class="fa-solid fa-list" aria-hidden="true"></i>
+                            Todos
+                        </button>
+                        <button class="filter-btn" data-categoria="entrada" aria-pressed="false">
+                            <i class="fa-solid fa-appetizers" aria-hidden="true"></i>
+                            Entradas
+                        </button>
+                        <button class="filter-btn" data-categoria="plato" aria-pressed="false">
+                            <i class="fa-solid fa-drumstick-bite" aria-hidden="true"></i>
+                            Platos
+                        </button>
+                        <button class="filter-btn" data-categoria="bebida" aria-pressed="false">
+                            <i class="fa-solid fa-glass-whiskey" aria-hidden="true"></i>
+                            Bebidas
+                        </button>
+                    </div>
+                    
+                    <div class="menu-grid" id="menu-grid" role="grid" aria-label="Lista de platillos">
+                        <!-- Los platillos se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Columna del Recomendador -->
+            <section class="recommender-section" aria-labelledby="recommender-title">
+                <div class="recommender-header">
+                    <h2 id="recommender-title" class="section-title">Recomendador Inteligente</h2>
+                    <p class="section-subtitle">Encuentra el platillo perfecto para ti</p>
+                </div>
+
+                <!-- Formulario de Preferencias -->
+                <form class="preferences-form" id="preferences-form" role="form" aria-label="Formulario de preferencias">
+                    <!-- Preferencias Culturales/Religiosas -->
+                    <fieldset class="form-fieldset">
+                        <legend class="fieldset-legend">
+                            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                            Preferencias Culturales/Religiosas
+                        </legend>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferencias_culturales" value="vegetariano" aria-describedby="vegetariano-desc">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Vegetariano</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferencias_culturales" value="sin_cerdo" aria-describedby="sin-cerdo-desc">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Sin cerdo</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferencias_culturales" value="sin_mariscos" aria-describedby="sin-mariscos-desc">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Sin mariscos</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="preferencias_culturales" value="vegano" aria-describedby="vegano-desc">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Vegano</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Estado de Ánimo/Salud -->
+                    <fieldset class="form-fieldset">
+                        <legend class="fieldset-legend">
+                            <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                            Estado de Ánimo / Salud
+                        </legend>
+                        <select name="estado_animo" class="form-select" aria-describedby="estado-animo-desc">
+                            <option value="">Selecciona tu estado...</option>
+                            <option value="ligero">Quiero algo ligero</option>
+                            <option value="enfermo">Estoy resfriado</option>
+                            <option value="poco_apetito">Tengo poco apetito</option>
+                            <option value="energia">Quiero energía</option>
+                            <option value="antojito">Quiero darme un gusto</option>
+                            <option value="caliente">Quiero algo caliente</option>
+                            <option value="fresco">Quiero algo fresco</option>
+                        </select>
+                    </fieldset>
+
+                    <!-- Presupuesto -->
+                    <fieldset class="form-fieldset">
+                        <legend class="fieldset-legend">
+                            <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+                            Presupuesto Máximo
+                        </legend>
+                        <div class="budget-container">
+                            <div class="budget-slider">
+                                <input type="range" 
+                                       name="presupuesto" 
+                                       min="10" 
+                                       max="100" 
+                                       value="50" 
+                                       class="budget-range" 
+                                       id="budget-slider"
+                                       aria-describedby="budget-value">
+                                <div class="budget-labels">
+                                    <span>S/ 10</span>
+                                    <span>S/ 100</span>
+                                </div>
+                            </div>
+                            <div class="budget-display">
+                                <span class="budget-value" id="budget-value">S/ 50</span>
+                                <span class="budget-available" id="budget-available">0 platillos disponibles</span>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Etiquetas Nutricionales -->
+                    <fieldset class="form-fieldset">
+                        <legend class="fieldset-legend">
+                            <i class="fa-solid fa-apple-alt" aria-hidden="true"></i>
+                            Etiquetas Nutricionales
+                        </legend>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="etiquetas_nutricionales" value="bajo_grasa">
+                                <span class="checkbox-custom"></span>
+                                <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                                <span class="checkbox-text">Bajo en grasa</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="etiquetas_nutricionales" value="alto_proteina">
+                                <span class="checkbox-custom"></span>
+                                <i class="fa-solid fa-dumbbell" aria-hidden="true"></i>
+                                <span class="checkbox-text">Alto en proteína</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="etiquetas_nutricionales" value="sin_gluten">
+                                <span class="checkbox-custom"></span>
+                                <i class="fa-solid fa-wheat-awn-circle-exclamation" aria-hidden="true"></i>
+                                <span class="checkbox-text">Sin gluten</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="etiquetas_nutricionales" value="vegano">
+                                <span class="checkbox-custom"></span>
+                                <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                                <span class="checkbox-text">Vegano</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Botones de Acción -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="recommend-btn">
+                            <i class="fa-solid fa-magic" aria-hidden="true"></i>
+                            <span>Recomiéndame</span>
+                        </button>
+                        <!-- Botón de micrófono eliminado -->
+                    </div>
+                </form>
+
+                <!-- Área de Resultados -->
+                <div class="results-area" id="results-area" aria-live="polite" aria-label="Resultados de recomendaciones">
+                    <!-- Los resultados se mostrarán aquí dinámicamente -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-info">
+                <span class="footer-copyright">
+                    <i class="fa-regular fa-copyright" aria-hidden="true"></i>
+                    Derechos reservados por Manfer Jesus Saravia Mateo. © 2025
+                </span>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/manfer-jesus-saravia-mateo-b91bb21b8/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.instagram.com/jsaraviamateo/" class="social-link" aria-label="Instagram" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/static/app.js"></script>
+</body>
+</html> 
